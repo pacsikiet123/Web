@@ -1,0 +1,36 @@
+
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: auto;
+    height: 50px;
+    align-items: center;
+}
+.Logo{
+    flex: 1
+    
+}
+.Menu{
+    flex: 3;
+    display: flex;
+}
+.Menu > li{
+    padding: 0 12px;
+}
+.Orther{
+    flex: 1;
+}
+.Orther > li{
+    padding: 0 12px;
+}
+.Orther > li:first-child input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
