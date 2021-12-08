@@ -3,12 +3,17 @@
     <head>
         <title>Shop ThinhVo</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="./Font/fontawesome-free-5.15.4-web/fontawesome-free-5.15.4-web/css/all.min.css">
+        <link rel="stylesheet" href="./style.css">
     </head>
-
+    <style type="text/css">
+        body {
+            overflow-x:hidden;
+        }
+    </style>
     <header>
         <div class="Logo">
-            <img src="logo.png" style="width:300px;height:100px;">
+            <img src="./Logo/logo.png" style="height: 86px; width: 250px;">
         </div>
         <div class ="Menu">
             <li><a href="">Trang chủ</a></li>
@@ -18,7 +23,36 @@
             <li><a href="">Thông Tin</a></li>
         </div>
         <div class="Other">
-            <li><input placeholder="Tìm kiếm" type="text"></li>
+            <li><input placeholder="Tìm kiếm" type="text"><i class="fas fa-search"></i></li>
+            <li><a class="fas fa-user-alt"></a></li>
+            <li><a class="fas fa-shopping-cart"></a></li>
         </div>
     </header>
+    <section id="Img">
+        <div class="aspect-ratio-169">
+            <img src="./Img/MainImg1.jpg">
+            <img src="./Img/MainImg2.jpg">
+            <img src="./Img/MainImg3.jpg">
+        </div>
+    </section>
+    <body>
+        <script>
+            const imgPosition = document.querySelectorAll(".aspect-ratio-169 img")
+            const imgContainer = document.querySelector('.aspect-ratio-169')
+            imgNumber = imgPosition.length
+            index = 0
+            imgPosition.forEach(function(image,index){
+                image.style.left = index*100 +"%"
+            })
+            function imgImg(){
+                index++;
+                console.log(index)
+                if (index>=imgNumber){
+                    index = 0
+                }
+                imgContainer.style.left = "-"+index*100+"%"    
+            }
+            setInterval(imgImg,5000)
+        </script>
+    </body>
 </html>
