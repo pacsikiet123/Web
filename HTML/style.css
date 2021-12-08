@@ -25,11 +25,14 @@ header{
     
 }
 .Menu{
-    flex: 3;
+    float: none;
+    flex: 4;
     display: flex;
 }
 .Menu > li{
+    float: none;
     padding: 0 12px;
+    font-size: 18px;
 }
 .Menu li a {
     font-weight: bold!important;
@@ -38,7 +41,7 @@ header{
     color: seashell!important;
 }
 .Other{
-    flex: 1;
+    flex: 0;
     display: flex;
 }
 .Other > li{
@@ -52,7 +55,7 @@ header{
     color: snow;
 }
 .Other > li:first-child input{
-    width: 130px;
+    width: 120px;
     box-sizing: border-box;
     border: 1px solid black;
     border-radius: 4px;
