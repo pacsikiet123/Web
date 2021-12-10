@@ -312,3 +312,115 @@ ul.category-product li:hover .buy{
 }
 
 
+/*Modal*/
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+@keyframes growth{
+    from{
+        transform: scale(var(--growth-from));
+    }
+    to{
+        transform: scale(var(--growth-to));
+    }
+}
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    animation: fadeIn linear 0.1s;
+}
+.modal-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1;
+}
+.modal-body{
+    --growth-form: 0.7;
+    --growth-to: 1;
+    width: 550px;
+    height: 550px;
+    background-color: #fff;
+    margin: auto;
+    z-index: 2;
+    border-radius: 5px;
+    animation: growth linear 0.1s
+}
+
+
+/*modal*/
+.auth-form-container{
+    padding: 0 32px;
+}
+
+.auth-form-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.auth-form-heading{
+    font-size: 2.2rem;
+    font-weight: 400px;
+    color: black;
+}
+.auth-form-switch-button{
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: red;
+    cursor: pointer;
+}
+.auth-form-form{
+    margin-top: 16px;   
+}
+.auth-form-input{
+    width: 100%;
+    height: 60px;
+    margin-top: 16px;
+    padding: 0 12px;
+    font-size: 1.4rem;
+    border: 1px solid var()
+}
+.auth-form-aside{
+    margin-top: 18px;
+}
+.auth-form-policy-text{
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    text-align: center;
+}
+.auth-form-policy-text a{
+    color: red;
+}
+
+.btn{
+    min-width: 140px;
+    height: 45px;
+    border: none;
+    border-radius: 2px;
+    font-size: 1.2rem;
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+}
+.btn.btn-second{
+    color: #fff;
+    background-color: rgb(192, 79, 13);
+}
+.auth-form-controls{
+    margin-top: 60px;
+}
+.auth-form-controls{
+    margin-left: 165px;
+}
