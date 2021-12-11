@@ -142,7 +142,7 @@ Validator.isRequired = function (selector, message) {
     return {
         selector: selector,
         test: function (value) {
-            return value ? undefined :  message || 'Vui lòng nhập trường này'
+            return value ? undefined :  message || 'Vui lòng nhập tên'
         }
     };
 }
@@ -152,7 +152,7 @@ Validator.isEmail = function (selector, message) {
         selector: selector,
         test: function (value) {
             var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            return regex.test(value) ? undefined :  message || 'Trường này phải là email';
+            return regex.test(value) ? undefined :  message || 'Vui lòng ghi đúng email';
         }
     };
 }

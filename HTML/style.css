@@ -91,6 +91,7 @@ header{
 }
 
 /*category*/
+
 .category-top{
     display: flex;
     flex-wrap: wrap;
@@ -396,7 +397,7 @@ body {
 
 .form-submit {
     outline: none;
-    background-color: #1dbfaf;
+    background-color: #bf6b1d;
     margin-top: 12px;
     padding: 12px 16px;
     font-weight: 600;
@@ -409,7 +410,7 @@ body {
 }
 
 .form-submit:hover {
-    background-color: #1ac7b6;
+    background-color: #1abbc7;
 }
 
 .spacer {
