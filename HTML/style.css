@@ -19,6 +19,7 @@ header{
     width: 100%;
     background: rgba(49, 29, 2, 0.63);
 }
+
 .Logo{
     flex: 1;
     padding: 0 12px;
@@ -311,7 +312,20 @@ ul.category-product li:hover .buy{
     border-radius: 50%;
     transform: translate(-50%)
 }
-
+.form-submit-comment{
+    width: 100%;
+    margin-top: 16px;
+    padding: 0 12px;
+}
+.submit-comment{
+    width: 100px;
+    height: 40px;
+    background-color: rgb(19, 66, 194);
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.4rem;
+}
 
 
 /*Register*/
@@ -416,4 +430,4 @@ body {
 .spacer {
     margin-top: 36px;
 }
-  
+
