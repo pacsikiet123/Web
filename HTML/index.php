@@ -16,15 +16,21 @@
             <img src="./Logo/logo.jpg" style="height: 86px; width: 250px;">
         </div>
         <div class ="Menu">
-            <li><a href="./index.html">Trang chủ</a></li>
-            <li><a href="./category.html">Sản Phẩm</a></li>
+            <li><a href="./index.php">Trang chủ</a></li>
+            <li><a href="./category.php">Sản Phẩm</a></li>
             <li><a href="">Khuyến mại</a></li>
             <li><a href="">Liên Hệ</a></li>
             <li><a href="">Thông Tin</a></li>
         </div>
         <div class="Other">
             <li><input placeholder="Tìm kiếm" type="text"><i class="fas fa-search"></i></li>
-            <li><a class="fas fa-user-alt"></a></li>
+            <li class="icon-user"><a class="fas fa-user-alt"></a>
+                <ul class="auth">
+                    <li class="auth-item"><a href="./Register.php">Đăng ký</a></li>
+                    <li class="auth-item"><a href="./Login.php">Đăng nhập</a></li>
+                    <li class="auth-item"><a href="">Đăng xuất</a></li>
+                </ul>
+            </li>
             <li><a class="fas fa-shopping-cart"></a></li>
         </div>
     </header>

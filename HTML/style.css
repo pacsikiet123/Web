@@ -48,6 +48,7 @@ header{
 .Other > li{
     padding: 0 12px;
 }
+
 .Other > li:first-child {
     position: relative;
 }
@@ -74,7 +75,36 @@ header{
     padding: 12px 0px;
     right: 25px;
 }
-
+.icon-user{
+    position: relative;
+}
+.auth{
+    position: absolute;
+    z-index: 1;
+    padding: 8px 0;
+    top: 100%;
+    right: 0;
+    width: 160px;
+    border-radius: 3px;
+    background-color: #0f8b8b;
+    list-style: none;
+    box-shadow: 0 1px 2px #e0e0e0;
+    display: none;
+}
+.auth-item a{
+    color: black;
+    font-size: 1rem;
+    padding: 6px 16px;
+    display: block;
+    
+}
+.auth-item a:hover{
+   
+    background-color: black;
+}
+.icon-user:hover .auth{
+    display: block;
+}
 .aspect-ratio-169 {
     display: block;
     position: relative;

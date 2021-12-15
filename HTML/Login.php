@@ -17,15 +17,21 @@
             <img src="./Logo/logo.jpg" style="height: 86px; width: 250px;">
         </div>
         <div class ="Menu">
-            <li><a href="http://127.0.0.1:5500/HTML/index.html">Trang chủ</a></li>
-            <li><a href="http://127.0.0.1:5500/HTML/category.html">Sản Phẩm</a></li>
+            <li><a href="./index.php">Trang chủ</a></li>
+            <li><a href="./category.php">Sản Phẩm</a></li>
             <li><a href="">Khuyến mại</a></li>
             <li><a href="">Liên Hệ</a></li>
             <li><a href="">Thông Tin</a></li>
         </div>
         <div class="Other">
             <li><input placeholder="Tìm kiếm" type="text"><i class="fas fa-search"></i></li>
-            <li><a class="fas fa-user-alt"></a></li>
+            <li class="icon-user"><a class="fas fa-user-alt"></a>
+                <ul class="auth">
+                    <li class="auth-item"><a href="./Register.php">Đăng ký</a></li>
+                    <li class="auth-item"><a href="./Login.php">Đăng nhập</a></li>
+                    <li class="auth-item"><a href="">Đăng xuất</a></li>
+                </ul>
+            </li>
             <li><a class="fas fa-shopping-cart"></a></li>
         </div>
     </header>
@@ -64,8 +70,34 @@
                     Validator.isEmail('#email'),
                     Validator.minLength('#password', 6),
                 ],
+                
                 onSubmit: function (data) {
-                    // Call API
+                    $email="";
+                    $password="";
+                    $conn = new mysqli('localhost','root','','userdatabse');
+                    mysqli_set_charset($conn,'utf8');
+                    if(isset($_POST['email'])){
+                        $email = $_POST['email'];
+                        $password = $_POST['password'];
+
+                        $sql = "SECLECT * FROM user WHERE email = '$email'";
+                        $query = mysqli_query($conn, $sql);
+                        $data1 = mysqli_fetch_assoc($query);
+                        $checkEmail = mysqli_num_rows($query);
+                        if($checkEmail==1){
+                            $checkPass = password_verify($password, $data1['password']);
+                            if(checkPass){
+                                $_SESSION['user'] = $data1;
+                                header('Location: index.php');
+                            }
+                            else{
+                                echo "sai mat khau";
+                            }
+                        }
+                        else{
+                            echo "mat khau khong ton tai";
+                        }
+                    }
                     console.log(data);
                 }
             });
