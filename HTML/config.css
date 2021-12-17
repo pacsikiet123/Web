@@ -1,0 +1,13 @@
+body {
+    overflow-x:hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+#login_error {
+    font-size: 20px;
+    color: red;
+    margin: 10px;
+}

@@ -30,7 +30,6 @@
               <ul class="auth">
                   <li class="auth-item"><a href="./Register.php">Đăng ký</a></li>
                   <li class="auth-item"><a href="./Login.php">Đăng nhập</a></li>
-                  <li class="auth-item"><a href="">Đăng xuất</a></li>
               </ul>
           </li>
             <li><a class="fas fa-shopping-cart"></a></li>
@@ -104,12 +103,10 @@
         $fullname = $_POST['fullname'];
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $pass_cryp = password_hash($password, PASSWORD_DEFAULT);
+        $pass_cryp = md5($password);
         $sql = "INSERT INTO user(fullname,email,password) VALUES ('$fullname','$email', '$pass_cryp')";
         if ($conn->query($sql) === TRUE) {
           header('Location: index.php');
-        } else {
-          echo "Error: " . $sql . "<br>" . $connect->error;
         }
         $query = mysqli_query($conn, $sql);           
       ?>

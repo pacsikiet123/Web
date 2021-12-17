@@ -1,3 +1,11 @@
+<?php
+    include 'connect_database.php';
+    $productid=$_GET['id'];
+    $connect = new mysqli('localhost','root','','userdatabse');
+    mysqli_set_charset($connect,'utf8');
+    $sql="SELECT * FROM `products` WHERE id=$productid";
+    $products = mysqli_query($connect, $sql);
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,27 +44,38 @@
     </header>
     <section class="product">
         <div class="container">
+        <?php
+            $productid=$_GET['id'];
+            $connect = new mysqli('localhost','root','','userdatabse');
+            mysqli_set_charset($connect,'utf8');
+            $sql="SELECT * FROM `products` WHERE id=$productid";
+            $products = mysqli_query($connect, $sql);
+            foreach ($products as $product){
+        ?>
             <div class="product-top-product">
-                <p>Trang chủ</p> <span>&#10230;</span> <p>Sản Phẩm</p><span>&#10230;</span><p>Hop yugioh</p>
+                <p>Trang chủ</p> <span>&#10230;</span> <p>Sản Phẩm</p><span>&#10230;</span><p><?=$product['name']?></p>
             </div>
             <div class="product-content">
                 <div class="product-content-left">
                     <div class="product-content-left-main-img">
-                        <img src="sp/sp1.png">
+                        <img src="sp/<?=$product['image']?>">
                     </div>
                     <div class="product-content-left-sub-img">
-                        <img src="sp/sp4.png">
-                        <img src="sp/sp2.png">
-                        <img src="sp/sp3.png">
+                        <img src="sp/<?=$product['subimage1']?>">
+                        <img src="sp/<?=$product['subimage2']?>">
+                        <img src="sp/<?=$product['subimage3']?>">
                     </div>
                 </div>
                 <div class="product-content-right">
                     <div class="product-content-right-product-name">
-                        <h1>Hop yugioh</h1>
+                        <h1><?=$product['name']?></h1>
                         <p>Mã: EN-152</p>
                     </div>
+        <?php
+            }
+        ?>
                     <div class="product-content-right-product-price">
-                        <p>1.700.000<sup>đ</sup></p>
+                        <p><?=$product['price']?><sup>đ</sup></p>
                     </div>
                     <div class="quantity">
                         <p style="font-weight: bold">Số lượng:</p>
@@ -75,21 +94,55 @@
                 </div>
             </div>
         </div>
-        <section>
-            <h1>Bình luận</h1>
-            <form method="POST">
-                <section>
-                    <textarea name="content" style="width: 45%;" rows="5" class="form-submit-comment" placeholder="Viet comment o day"></textarea>
-                </section>
-                <section><input type="submit" value="Submit" class="submit-comment"></section>
-            </form>
-        </section>
-        <?php
-            if(isset($_POST['content'])){
-                $content = $_POST['content']
+        <section class="cmt">
+            <div class="cmt-left">
+                <h1 style="font-size: 30px">Bình luận:</h1>
+                <form method="POST">
+                    <section>
+                        <textarea name="content" style="width: 85%;" rows="5" class="form-submit-comment" placeholder="Viet comment o day"></textarea>
+                    </section>
+                    <input style="margin-top:15px " type="submit" value="Submit" class="submit-comment">
+                </form>
+            </div>
+            <div class="cmt-right" style="margin-top: 30px">
                 
-            }
-        ?>
+                <?php
+                    $connect = new mysqli('localhost','root','','userdatabse');
+                    mysqli_set_charset($connect,'utf8');
+                    $comment = $connect->query("SELECT * FROM user a JOIN comment b ON a.id=b.userid JOIN products c ON b.productid=c.id WHERE productid=".$_GET['id']);
+                    foreach($comment as $cmt){
+                ?>
+                <div class="cmt-item">
+                    <li class="cmt-item-fullname"><?=$cmt['fullname']?></li>
+                    <li class="cmt-item-date"><?=$cmt['date']?></li>
+                    <li class="cmt-item-content"><?=$cmt['content']?></li>
+                </div>
+                <?php
+                    }
+                ?>
+            </div>
+            <?php
+                $connect = new mysqli('localhost','root','','userdatabse');
+                mysqli_set_charset($connect,'utf8');
+                if(isset($_POST['content'])){
+                    $content = $_POST['content'];
+                    if(isset($_COOKIE['name'])){
+                      $emailTmp = explode('@',$_COOKIE['name'])[0].'@gmail.com';
+                      $sql="SELECT * FROM `user` WHERE `email` LIKE '$emailTmp'";
+                      $user = mysqli_query($connect, $sql);
+                      $userid = mysqli_fetch_array($user)['id'];
+                      $user = mysqli_query($connect, $sql);
+                      $fullname = mysqli_fetch_array($user)['fullname'];
+                      $productid=$_GET['id'];
+                      $sql1 = "INSERT INTO comment(userid,date,content,fullname,productid) VALUES ($userid,now(), '$content','$fullname',$productid)";
+                      $query = mysqli_query($connect, $sql1);         
+                   }
+                    else{
+                        header("Location: Login.php");
+                    }
+                }   
+            ?>
+        </section>
     </section>
 
     <script>
