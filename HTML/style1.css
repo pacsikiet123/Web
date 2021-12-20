@@ -1,0 +1,62 @@
+/*user*/
+.information{
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.information{
+    margin-top: 70px;
+}
+.information-top{
+    font-size: 40px;
+    padding-bottom: 35px;
+}
+.information-down-information{
+    display: flex;
+}
+.information-down-information{
+    padding: 20px 10px;
+}
+.information-down-information p{
+    font-size: 15px;
+}
+
+.information-down-information p{
+    width: 20%;
+}
+.information-down-information .information-area{
+    width: 80%;
+}
+
+.information-area{
+    font-size: 14px;
+    background: #fff;
+    font-weight: 400;
+    border: 1px solid #d7d7d7;
+    padding: 7px 18px 5px 18px;
+    height: 34px;
+    -webkit-border-radius: 20px;
+}
+.information-update{
+    float: right;
+    font-size: 16px;
+    color: black;
+}
+.information-update{
+    background: #8a774d none repeat scroll 0 0;
+    border: medium none;
+    text-shadow: none;
+    font-size: 16px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    height: 35px;
+    padding: 0 25px;
+    line-height: 35px;
+    color: #fff;
+    -webkit-border-radius: 20px;
+}
+.information-update li{
+    color: seashell!important;
+}
+

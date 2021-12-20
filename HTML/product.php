@@ -1,10 +1,8 @@
 <?php
     include 'connect_database.php';
     $productid=$_GET['id'];
-    $connect = new mysqli('localhost','root','','userdatabse');
-    mysqli_set_charset($connect,'utf8');
     $sql="SELECT * FROM `products` WHERE id=$productid";
-    $products = mysqli_query($connect, $sql);
+    $products = mysqli_query($connect_sql, $sql);
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,10 +44,8 @@
         <div class="container">
         <?php
             $productid=$_GET['id'];
-            $connect = new mysqli('localhost','root','','userdatabse');
-            mysqli_set_charset($connect,'utf8');
             $sql="SELECT * FROM `products` WHERE id=$productid";
-            $products = mysqli_query($connect, $sql);
+            $products = mysqli_query($connect_sql, $sql);
             foreach ($products as $product){
         ?>
             <div class="product-top-product">
@@ -97,20 +93,18 @@
         <section class="cmt">
             <div class="cmt-left">
                 <h1 style="font-size: 30px">Bình luận:</h1>
-                <form method="POST">
+                <form method="POST" >
                     <section>
                         <textarea name="content" style="width: 85%;" rows="5" class="form-submit-comment" placeholder="Viet comment o day"></textarea>
                     </section>
-                    <input style="margin-top:15px " type="submit" value="Submit" class="submit-comment">
+                    <button style="margin-top:15px" type="submit" value="Submit" class="submit-comment">Submit</button>
                 </form>
             </div>
             <div class="cmt-right" style="margin-top: 30px">
-                
                 <?php
-                    $connect = new mysqli('localhost','root','','userdatabse');
-                    mysqli_set_charset($connect,'utf8');
-                    $comment = $connect->query("SELECT * FROM user a JOIN comment b ON a.id=b.userid JOIN products c ON b.productid=c.id WHERE productid=".$_GET['id']);
-                    foreach($comment as $cmt){
+                    $sql = ("SELECT * FROM user a JOIN comment b ON a.id=b.userid JOIN products c ON b.productid=c.id WHERE productid=".$_GET['id']);
+                    $comments= mysqli_query($connect_sql, $sql);
+                    foreach($comments as $cmt){
                 ?>
                 <div class="cmt-item">
                     <li class="cmt-item-fullname"><?=$cmt['fullname']?></li>
@@ -122,26 +116,26 @@
                 ?>
             </div>
             <?php
-                $connect = new mysqli('localhost','root','','userdatabse');
-                mysqli_set_charset($connect,'utf8');
                 if(isset($_POST['content'])){
                     $content = $_POST['content'];
                     if(isset($_COOKIE['name'])){
                       $emailTmp = explode('@',$_COOKIE['name'])[0].'@gmail.com';
                       $sql="SELECT * FROM `user` WHERE `email` LIKE '$emailTmp'";
-                      $user = mysqli_query($connect, $sql);
+                      $user = mysqli_query($connect_sql, $sql);
                       $userid = mysqli_fetch_array($user)['id'];
-                      $user = mysqli_query($connect, $sql);
+                      $user = mysqli_query($connect_sql, $sql);
                       $fullname = mysqli_fetch_array($user)['fullname'];
                       $productid=$_GET['id'];
                       $sql1 = "INSERT INTO comment(userid,date,content,fullname,productid) VALUES ($userid,now(), '$content','$fullname',$productid)";
-                      $query = mysqli_query($connect, $sql1);         
-                   }
+                      $query = mysqli_query($connect_sql, $sql1); 
+                      echo "<script>tai_lai_trang();</script>";
+                    }
                     else{
                         header("Location: Login.php");
                     }
                 }   
             ?>
+            
         </section>
     </section>
 

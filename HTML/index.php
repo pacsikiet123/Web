@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +26,7 @@
                     <ul class="auth">
                         <li id ='register_label' class="auth-item"><a href="./Register.php">Đăng ký</a></li>
                         <li id = 'login_label' class="auth-item"><a href="./Login.php">Đăng nhập</a></li>
-                        <li id = 'username' class="auth-item hidden"></li>
+                       <a href="./information.php"><li id = 'username' class="auth-item hidden"></li></a>
                         <li id = 'logout' class="auth-item hidden"><a href="index.php?logout=true">Đăng xuất</a></li>
                     </ul>
                 </li>

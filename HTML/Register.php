@@ -106,7 +106,7 @@
         $pass_cryp = md5($password);
         $sql = "INSERT INTO user(fullname,email,password) VALUES ('$fullname','$email', '$pass_cryp')";
         if ($conn->query($sql) === TRUE) {
-          header('Location: index.php');
+          header('Location: Login.php');
         }
         $query = mysqli_query($conn, $sql);           
       ?>
