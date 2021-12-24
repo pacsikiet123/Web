@@ -2,20 +2,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Shop ThinhVo</title>
+        <title>Đăng kí</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="./Font/fontawesome-free-5.15.4-web/fontawesome-free-5.15.4-web/css/all.min.css">
         <link rel="stylesheet" href="./style.css">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="./config.css">
     </head>
     <style type="text/css">
         body {
             overflow-x:hidden;
         }
     </style>
+      
     <header>
         <div class="Logo">
-            <img src="./Logo/logo.jpg" style="height: 86px; width: 250px;">
+          <img src="./logo1.png">
         </div>
         <div class ="Menu">
             <li><a href="./index.php">Trang chủ</a></li>
@@ -28,8 +29,10 @@
             <li><input placeholder="Tìm kiếm" type="text"><i class="fas fa-search"></i></li>
             <li class="icon-user"><a class="fas fa-user-alt"></a>
               <ul class="auth">
-                  <li class="auth-item"><a href="./Register.php">Đăng ký</a></li>
-                  <li class="auth-item"><a href="./Login.php">Đăng nhập</a></li>
+              <li id ='register_label' class="auth-item"><a href="./Register.php">Đăng ký</a></li>
+                        <li id = 'login_label' class="auth-item"><a href="./Login.php">Đăng nhập</a></li>
+                        <a href="./information.php"><li id = 'username' class="auth-item hidden"></li></a>
+                        <li id = 'logout' class="auth-item hidden"><a href="index.php?logout=true">Đăng xuất</a></li>
               </ul>
           </li>
             <li><a class="fas fa-shopping-cart"></a></li>
@@ -68,7 +71,6 @@
           </div>
   
           <button type="submit" class="form-submit">Đăng ký</button>
-       
         </form>
   
     </div>          
@@ -85,7 +87,7 @@
             rules: [
               Validator.isRequired('#fullname', 'Vui lòng nhập tên đầy đủ của bạn'),
               Validator.isEmail('#email'),
-              Validator.minLength('#password', 6),
+              Validator.minLength('#password', 8),
               Validator.isRequired('#password_confirmation'),
               Validator.isConfirmed('#password_confirmation', function () {
                 return document.querySelector('#form-1 #password').value;
@@ -100,14 +102,22 @@
         $password="";
         $conn = new mysqli('localhost','root','','userdatabse');
         mysqli_set_charset($conn,'utf8');
-        $fullname = $_POST['fullname'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $pass_cryp = md5($password);
-        $sql = "INSERT INTO user(fullname,email,password) VALUES ('$fullname','$email', '$pass_cryp')";
-        if ($conn->query($sql) === TRUE) {
-          header('Location: Login.php');
-        }
-        $query = mysqli_query($conn, $sql);           
+        if(isset($_POST['fullname'])){
+          $fullname = $_POST['fullname'];
+          $email = $_POST['email'];
+          $password = $_POST['password'];
+          $pass_cryp = md5($password);
+          $sql = "INSERT INTO user(fullname,email,password) VALUES ('$fullname','$email', '$pass_cryp')";
+          $query = mysqli_query($conn, $sql);  
+          echo "toLogin();"; 
+        }   
       ?>
+       <script type="text/javascript">
+        function toLogin() {
+          window.location="./Login.php";
+        }
+      </script>
+      <script>
+        <?php include './login_out_handle.php'; ?>
+      </script>
 </html>

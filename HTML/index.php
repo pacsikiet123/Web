@@ -2,16 +2,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Shop ThinhVo</title>
+        <title>Trang chủ</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="./Font/fontawesome-free-5.15.4-web/fontawesome-free-5.15.4-web/css/all.min.css">
         <link rel="stylesheet" href="./style.css">
         <link rel="stylesheet" href="./config.css">
+        <link rel="stylesheet" href="./style1.css">
     </head>
+    <style type="text/css">
+        body {
+            overflow-x:hidden;
+            overflow-y:hidden;
+        }
+    </style>
     <body>
         <header>
             <div class="Logo">
-                <img src="./Logo/logo.jpg" style="height: 86px; width: 250px;">
+                <img src="./logo1.png">
             </div>
             <div class ="Menu">
                 <li><a href="./index.php">Trang chủ</a></li>
@@ -26,7 +33,7 @@
                     <ul class="auth">
                         <li id ='register_label' class="auth-item"><a href="./Register.php">Đăng ký</a></li>
                         <li id = 'login_label' class="auth-item"><a href="./Login.php">Đăng nhập</a></li>
-                       <a href="./information.php"><li id = 'username' class="auth-item hidden"></li></a>
+                        <a href="./information.php"><li id = 'username' class="auth-item hidden"></li></a>
                         <li id = 'logout' class="auth-item hidden"><a href="index.php?logout=true">Đăng xuất</a></li>
                     </ul>
                 </li>

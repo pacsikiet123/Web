@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Shop ThinhVo</title>
+        <title>Đăng nhập</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="./Font/fontawesome-free-5.15.4-web/fontawesome-free-5.15.4-web/css/all.min.css">
         <link rel="stylesheet" href="./style.css">
@@ -17,7 +17,7 @@
     <style type="text/css" src='config.css'></style>
     <header>
         <div class="Logo">
-            <img src="./Logo/logo.jpg" style="height: 86px; width: 250px;">
+            <img src="./logo1.png">
         </div>
         <div class ="Menu">
             <li><a href="./index.php">Trang chủ</a></li>
@@ -30,9 +30,10 @@
             <li><input placeholder="Tìm kiếm" type="text"><i class="fas fa-search"></i></li>
             <li class="icon-user"><a class="fas fa-user-alt"></a>
                 <ul class="auth">
-                    <li class="auth-item"><a href="Register.php">Đăng ký</a></li>
-                    <li class="auth-item"><a href="./Login.php">Đăng nhập</a></li>
-                    <li class="auth-item hidden"><a href="">Đăng xuất</a></li>
+                    <li id ='register_label' class="auth-item"><a href="./Register.php">Đăng ký</a></li>
+                    <li id = 'login_label' class="auth-item"><a href="./Login.php">Đăng nhập</a></li>
+                    <a href="./information.php"><li id = 'username' class="auth-item hidden"></li></a>
+                    <li id = 'logout' class="auth-item hidden"><a href="index.php?logout=true">Đăng xuất</a></li>
                 </ul>
             </li>
             <li><a class="fas fa-shopping-cart"></a></li>
@@ -97,11 +98,14 @@
                     session_start();
                     $_SESSION['email'] = $email;
                     header("Location: index.php");
-                    setcookie("name", $email.md5(time()), time() + 3600, "/");
+                    setcookie("name", $email.'|||||'.md5(time()), time() + 3600, "/");
                 } else{
                     echo "<script>document.getElementById('login_error').innerHTML='Sai Tài khoản hoặc mật khẩu'</script>";
                 }
             }
 
-        ?>        
+        ?>   
+        <script>
+            <?php include './login_out_handle.php'; ?>
+        </script>  
 </html>

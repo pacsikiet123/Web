@@ -3,14 +3,35 @@
     $productid=$_GET['id'];
     $sql="SELECT * FROM `products` WHERE id=$productid";
     $products = mysqli_query($connect_sql, $sql);
+    if(isset($_POST['content']) && $_POST['content']!=""){
+        $content = $_POST['content'];
+        $businessDesc = strip_tags($content);
+        $businessDesc = substr($businessDesc, 0, 5000);
+        if(isset($_COOKIE['name'])){
+          $emailTmp = explode('|||||',$_COOKIE['name'])[0];
+          $sql="SELECT * FROM `user` WHERE `email` LIKE '$emailTmp'";
+          $user = mysqli_query($connect_sql, $sql);
+          $userid = mysqli_fetch_array($user)['id'];
+          $user = mysqli_query($connect_sql, $sql);
+          $fullname = mysqli_fetch_array($user)['fullname'];
+          $productid=$_GET['id'];
+          $sql1 = "INSERT INTO comment(userid,date,content,fullname,productid) VALUES ($userid,now(), '$businessDesc','$fullname',$productid)";
+          $query = mysqli_query($connect_sql, $sql1); 
+        }
+        else{
+            header("Location: Login.php");
+        }
+    }   
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Shop ThinhVo</title>
+        <title>Sản phẩm</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="./Font/fontawesome-free-5.15.4-web/fontawesome-free-5.15.4-web/css/all.min.css">
         <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="./config.css">
+        <link rel="stylesheet" href="./style1.css">
     </head>
     <style type="text/css">
         body {
@@ -19,7 +40,7 @@
     </style>
     <header>
         <div class="Logo">
-            <img src="./Logo/logo.jpg" style="height: 86px; width: 250px;">
+            <img src="./logo1.png">
         </div>
         <div class ="Menu">
             <li><a href="./index.php">Trang chủ</a></li>
@@ -32,9 +53,10 @@
             <li><input placeholder="Tìm kiếm" type="text"><i class="fas fa-search"></i></li>
             <li class="icon-user"><a class="fas fa-user-alt"></a>
                 <ul class="auth">
-                    <li class="auth-item"><a href="./Register.php">Đăng ký</a></li>
-                    <li class="auth-item"><a href="./Login.php">Đăng nhập</a></li>
-                    <li class="auth-item"><a href="">Đăng xuất</a></li>
+                    <li id ='register_label' class="auth-item"><a href="./Register.php">Đăng ký</a></li>
+                    <li id = 'login_label' class="auth-item"><a href="./Login.php">Đăng nhập</a></li>
+                    <a href="./information.php"><li id = 'username' class="auth-item hidden"></li></a>
+                    <li id = 'logout' class="auth-item hidden"><a href="index.php?logout=true">Đăng xuất</a></li>
                 </ul>
             </li>
             <li><a class="fas fa-shopping-cart"></a></li>
@@ -95,9 +117,9 @@
                 <h1 style="font-size: 30px">Bình luận:</h1>
                 <form method="POST" >
                     <section>
-                        <textarea name="content" style="width: 85%;" rows="5" class="form-submit-comment" placeholder="Viet comment o day"></textarea>
+                        <textarea name="content" style="width: 85%;resize: none;padding-top:10px;" rows="5" class="form-submit-comment" placeholder="Bình luận ở đây nè"></textarea>
                     </section>
-                    <button style="margin-top:15px" type="submit" value="Submit" class="submit-comment">Submit</button>
+                    <button  style="margin-top:15px" type="submit" value="Submit" class="submit-comment">Bình luận</button>
                 </form>
             </div>
             <div class="cmt-right" style="margin-top: 30px">
@@ -115,30 +137,14 @@
                     }
                 ?>
             </div>
-            <?php
-                if(isset($_POST['content'])){
-                    $content = $_POST['content'];
-                    if(isset($_COOKIE['name'])){
-                      $emailTmp = explode('@',$_COOKIE['name'])[0].'@gmail.com';
-                      $sql="SELECT * FROM `user` WHERE `email` LIKE '$emailTmp'";
-                      $user = mysqli_query($connect_sql, $sql);
-                      $userid = mysqli_fetch_array($user)['id'];
-                      $user = mysqli_query($connect_sql, $sql);
-                      $fullname = mysqli_fetch_array($user)['fullname'];
-                      $productid=$_GET['id'];
-                      $sql1 = "INSERT INTO comment(userid,date,content,fullname,productid) VALUES ($userid,now(), '$content','$fullname',$productid)";
-                      $query = mysqli_query($connect_sql, $sql1); 
-                      echo "<script>tai_lai_trang();</script>";
-                    }
-                    else{
-                        header("Location: Login.php");
-                    }
-                }   
-            ?>
-            
         </section>
     </section>
 
+    <script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
     <script>
         const mainImg = document.querySelector(".product-content-left-main-img img")
         const subImg = document.querySelectorAll(".product-content-left-sub-img img")
@@ -147,5 +153,8 @@
                 mainImg.src = imgImp.src
             })
         })
+    </script>
+    <script>
+        <?php include './login_out_handle.php'; ?>
     </script>
 </html>
